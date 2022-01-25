@@ -14,12 +14,10 @@ xls_split = pd.ExcelFile('stock_split.xlsx')
 df1 = pd.read_excel(xls, 'Stock')
 df2 = pd.read_excel(xls_split, 'Split')
 
-
 #Sym, Quanitiy Available, Avg price, Invested Amt, Current Amt, Abs return, % of Invested, % of current, % of change
 df1['Invested Amt'] = df1['Quantity Available'] * df1['Average Price']
 df1['Current Amt'] = df1['Quantity Available'] * df1['Previous Closing Price']
 df1['Abs return'] = round(((df1['Current Amt'] - df1['Invested Amt']) / df1['Invested Amt'])*100, 2)
-#df1['Perentage allocation'] =
 
 total_invested_price = df1['Invested Amt'].sum()
 total_current_price = df1['Current Amt'].sum()
@@ -58,4 +56,3 @@ df_tmp = pd.DataFrame(data, columns = ['Name', 'Invested Amt', 'Current Amt'])
 df_tmp['% of invested Amt'] = round((df_tmp['Invested Amt']/total_invested_price)*100, 2)
 df_tmp['% of current Amt'] = round((df_tmp['Current Amt']/total_current_price)*100, 2)
 write_to_excel(df_tmp, 'Output')
-
